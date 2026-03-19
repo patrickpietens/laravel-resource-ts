@@ -112,7 +112,7 @@ class StaticAnalyzer implements TypeInferrer
         $fields = [];
 
         foreach ($array->items as $item) {
-            if ($item === null || $item->key === null) {
+            if ($item->key === null) {
                 continue;
             }
 
