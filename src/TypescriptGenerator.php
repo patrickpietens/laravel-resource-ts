@@ -24,6 +24,17 @@ class TypescriptGenerator
     }
 
     /**
+     * Generate a single TypeScript file for one resource definition.
+     */
+    public function generateSingle(ResourceDefinition $definition): string
+    {
+        $output = $this->generateHeader();
+        $output .= $this->generateType($definition);
+
+        return rtrim($output)."\n";
+    }
+
+    /**
      * Generate the file header comment.
      */
     protected function generateHeader(): string

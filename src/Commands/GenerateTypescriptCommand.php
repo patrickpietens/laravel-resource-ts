@@ -12,8 +12,9 @@ use ResourceTs\TypescriptGenerator;
 class GenerateTypescriptCommand extends Command
 {
     public $signature = 'typescript:generate
-                        {--output= : Output file path (overrides config)}
-                        {--resource= : Generate for a specific resource class only}';
+                        {--output= : Output directory path (overrides config)}
+                        {--resource= : Generate for a specific resource class only}
+                        {--separate-files : Generate a separate file for each resource type}';
 
     public $description = 'Generate TypeScript type definitions from Laravel API Resources';
 
@@ -47,17 +48,21 @@ class GenerateTypescriptCommand extends Command
         }
 
         $generator = new TypescriptGenerator;
-        $typescript = $generator->generate($definitions);
+        $separateFiles = $this->option('separate-files') || config('resource-ts.separate_files', false);
 
-        $outputPath = $this->option('output') ?? config('resource-ts.output');
+        $outputPath = $this->option('output') ?? config('resource-ts.output.path');
+        $outputFile = config('resource-ts.output.file');
 
-        // Ensure the directory exists
-        $directory = dirname($outputPath);
-        if (! is_dir($directory)) {
-            File::makeDirectory($directory, 0755, true);
+        // Ensure the output directory exists
+        if (! is_dir($outputPath)) {
+            File::makeDirectory($outputPath, 0755, true);
         }
 
-        File::put($outputPath, $typescript);
+        if ($separateFiles) {
+            $this->generateSeparateFiles($generator, $definitions, $outputPath);
+        } else {
+            $this->generateSingleFile($generator, $definitions, $outputPath, $outputFile);
+        }
 
         $count = count($definitions);
         $this->components->info("Generated {$count} ".str('type')->plural($count)." in {$outputPath}");
@@ -71,5 +76,29 @@ class GenerateTypescriptCommand extends Command
         );
 
         return self::SUCCESS;
+    }
+
+    /**
+     * Generate all types into a single file.
+     */
+    protected function generateSingleFile(TypescriptGenerator $generator, array $definitions, string $outputPath, string $outputFile): void
+    {
+        $typescript = $generator->generate($definitions);
+        $fullPath = $outputPath.'/'.$outputFile;
+
+        File::put($fullPath, $typescript);
+    }
+
+    /**
+     * Generate a separate file for each resource definition.
+     */
+    protected function generateSeparateFiles(TypescriptGenerator $generator, array $definitions, string $outputPath): void
+    {
+        foreach ($definitions as $definition) {
+            $typescript = $generator->generateSingle($definition);
+            $filePath = $outputPath.'/'.$definition->typeName.'.d.ts';
+
+            File::put($filePath, $typescript);
+        }
     }
 }
