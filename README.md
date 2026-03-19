@@ -147,8 +147,14 @@ class UserResource extends JsonResource { ... }
 
 ```php
 return [
-    // Where to write the generated .d.ts file
-    'output' => resource_path('js/types/resources.d.ts'),
+    // Output configuration for generated TypeScript definitions
+    'output' => [
+        'path' => resource_path('js/types'),  // Directory for output
+        'file' => 'resources.d.ts',          // Filename (when not using separate files)
+    ],
+
+    // Write each resource to its own file (e.g. User.d.ts, Post.d.ts)
+    'separate_files' => true,
 
     // Directories to scan for Resource classes
     'paths' => [
@@ -163,10 +169,6 @@ return [
 
     // Sort types alphabetically in output
     'sort_types' => true,
-
-    // Add prefix/suffix to all type names
-    'type_prefix' => '',
-    'type_suffix' => '',
 ];
 ```
 
