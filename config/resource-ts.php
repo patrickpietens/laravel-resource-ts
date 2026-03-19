@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'separate_files' => false,
+    'separate_files' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -85,18 +85,5 @@ return [
     */
 
     'sort_types' => true,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Global Prefix / Suffix
-    |--------------------------------------------------------------------------
-    |
-    | Optionally add a prefix or suffix to all generated TypeScript type names.
-    | For example, prefix "Api" would generate "ApiUser" instead of "User".
-    |
-    */
-
-    'type_prefix' => '',
-    'type_suffix' => '',
 
 ];
