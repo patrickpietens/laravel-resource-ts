@@ -65,11 +65,11 @@ class GenerateTypescriptCommand extends Command
         }
 
         $count = count($definitions);
-        $this->components->info("Generated {$count} " . str('type')->plural($count) . " in {$outputPath}");
+        $this->components->info("Generated {$count} ".str('type')->plural($count)." in {$outputPath}");
 
         $this->table(
             ['Type', 'Fields'],
-            collect($definitions)->map(fn($def) => [
+            collect($definitions)->map(fn ($def) => [
                 $def->typeName,
                 count($def->fields),
             ])->toArray(),
@@ -84,7 +84,7 @@ class GenerateTypescriptCommand extends Command
     protected function generateSingleFile(TypescriptGenerator $generator, array $definitions, string $outputPath, string $outputFile): void
     {
         $typescript = $generator->generate($definitions);
-        $fullPath = $outputPath . '/' . $outputFile;
+        $fullPath = $outputPath.'/'.$outputFile;
 
         File::put($fullPath, $typescript);
     }
@@ -96,7 +96,7 @@ class GenerateTypescriptCommand extends Command
     {
         foreach ($definitions as $definition) {
             $typescript = $generator->generateSingle($definition);
-            $filePath = $outputPath . '/' . $definition->typeName . '.d.ts';
+            $filePath = $outputPath.'/'.$definition->typeName.'.d.ts';
 
             File::put($filePath, $typescript);
         }
