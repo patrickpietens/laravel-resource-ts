@@ -1,0 +1,85 @@
+<?php
+
+// config for ResourceTs
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Output Path
+    |--------------------------------------------------------------------------
+    |
+    | The file path where the generated TypeScript definitions will be written.
+    | This path is relative to the base path of your Laravel application.
+    |
+    */
+
+    'output' => resource_path('js/types/resources.d.ts'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resource Paths
+    |--------------------------------------------------------------------------
+    |
+    | Directories to scan for API Resource classes. The package will
+    | recursively search these directories for classes that extend
+    | Illuminate\Http\Resources\Json\JsonResource.
+    |
+    */
+
+    'paths' => [
+        app_path('Http/Resources'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Auto-discover Models
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the package will attempt to resolve the underlying Eloquent
+    | model for each resource and use its $casts array to infer field types.
+    | Disable this if you prefer to rely solely on attributes and static analysis.
+    |
+    */
+
+    'auto_discover_models' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Strip Resource Suffix
+    |--------------------------------------------------------------------------
+    |
+    | By default, the "Resource" suffix is stripped from the class name when
+    | generating the TypeScript type name (e.g. UserResource -> User).
+    | Set this to false to keep the full class name.
+    |
+    */
+
+    'strip_resource_suffix' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sort Types
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the generated TypeScript types will be sorted
+    | alphabetically. This produces deterministic output that is easier
+    | to review in version control diffs.
+    |
+    */
+
+    'sort_types' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Global Prefix / Suffix
+    |--------------------------------------------------------------------------
+    |
+    | Optionally add a prefix or suffix to all generated TypeScript type names.
+    | For example, prefix "Api" would generate "ApiUser" instead of "User".
+    |
+    */
+
+    'type_prefix' => '',
+    'type_suffix' => '',
+
+];
