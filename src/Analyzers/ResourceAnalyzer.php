@@ -199,6 +199,6 @@ class ResourceAnalyzer
         $prefix = config('resource-ts.type_prefix', '');
         $suffix = config('resource-ts.type_suffix', '');
 
-        return $prefix . $shortName . $suffix;
+        return $prefix.$shortName.$suffix;
     }
 }

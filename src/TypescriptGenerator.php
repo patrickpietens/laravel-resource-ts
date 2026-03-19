@@ -20,7 +20,7 @@ class TypescriptGenerator
             $output .= "\n";
         }
 
-        return rtrim($output) . "\n";
+        return rtrim($output)."\n";
     }
 
     /**
@@ -53,6 +53,6 @@ class TypescriptGenerator
 
         $lines[] = '};';
 
-        return implode("\n", $lines) . "\n";
+        return implode("\n", $lines)."\n";
     }
 }

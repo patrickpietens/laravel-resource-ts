@@ -498,7 +498,7 @@ class StaticAnalyzer implements TypeInferrer
                 // Resolve relative class names
                 if (! class_exists($modelClass)) {
                     $namespace = $reflection->getNamespaceName();
-                    $fqcn = $namespace . '\\' . $modelClass;
+                    $fqcn = $namespace.'\\'.$modelClass;
                     if (class_exists($fqcn)) {
                         $modelClass = $fqcn;
                     }
@@ -581,7 +581,7 @@ class StaticAnalyzer implements TypeInferrer
 
         // Try same namespace
         $namespace = $reflection->getNamespaceName();
-        $fqcn = $namespace . '\\' . $shortName;
+        $fqcn = $namespace.'\\'.$shortName;
 
         return class_exists($fqcn) ? $fqcn : null;
     }
@@ -601,6 +601,6 @@ class StaticAnalyzer implements TypeInferrer
         $prefix = config('resource-ts.type_prefix', '');
         $suffix = config('resource-ts.type_suffix', '');
 
-        return $prefix . $shortName . $suffix;
+        return $prefix.$shortName.$suffix;
     }
 }

@@ -60,7 +60,7 @@ class GenerateTypescriptCommand extends Command
         File::put($outputPath, $typescript);
 
         $count = count($definitions);
-        $this->components->info("Generated {$count} " . str('type')->plural($count) . " in {$outputPath}");
+        $this->components->info("Generated {$count} ".str('type')->plural($count)." in {$outputPath}");
 
         $this->table(
             ['Type', 'Fields'],
