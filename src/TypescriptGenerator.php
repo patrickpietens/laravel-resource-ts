@@ -20,7 +20,18 @@ class TypescriptGenerator
             $output .= "\n";
         }
 
-        return rtrim($output) . "\n";
+        return rtrim($output)."\n";
+    }
+
+    /**
+     * Generate a single TypeScript file for one resource definition.
+     */
+    public function generateSingle(ResourceDefinition $definition): string
+    {
+        $output = $this->generateHeader();
+        $output .= $this->generateType($definition);
+
+        return rtrim($output)."\n";
     }
 
     /**
@@ -53,6 +64,6 @@ class TypescriptGenerator
 
         $lines[] = '};';
 
-        return implode("\n", $lines) . "\n";
+        return implode("\n", $lines)."\n";
     }
 }

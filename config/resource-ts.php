@@ -5,15 +5,32 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Output Path
+    | Output
     |--------------------------------------------------------------------------
     |
-    | The file path where the generated TypeScript definitions will be written.
-    | This path is relative to the base path of your Laravel application.
+    | Configure where the generated TypeScript definitions will be written.
+    | "path" is the directory, and "file" is the filename used when all
+    | types are written to a single file (i.e. separate_files is false).
     |
     */
 
-    'output' => resource_path('js/types/resources.d.ts'),
+    'output' => [
+        'path' => resource_path('js/types'),
+        'file' => 'resources.d.ts',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Separate Files
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, each resource will be written to its own TypeScript file
+    | in the output path directory (e.g. User.d.ts, Post.d.ts). When
+    | disabled, all types are written to a single file.
+    |
+    */
+
+    'separate_files' => false,
 
     /*
     |--------------------------------------------------------------------------
